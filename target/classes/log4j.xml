@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true"  xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} %5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="fileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="append" value="true"/>
+        <param name="maxBackupIndex" values="1000"/>
+        <param name="file" value="/u02/data-auto-renewals/data-auto-renewals.log"/>
+        <param name="DatePattern" value="'-'yyyy'_'MM-dd-'T'HH'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} %5p %c{1} - %m%n"/>
+        </layout>
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name ="ActiveFileName"  value="auto-renewal.log"/>
+            <param name ="FileNamePattern" value="auto-renewal.%d{yyyyMMdd-HHmm}.log.gz"/>
+        </rollingPolicy>
+    </appender>
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <!--<appender-ref ref="fileAppender"/>-->
+    </root>
+</log4j:configuration>
